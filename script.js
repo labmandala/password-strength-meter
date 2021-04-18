@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	$("#meter").progressbar();
 	$("#password").keyup(function(){
 		checkPassword($("#password").val());
 	});
@@ -31,5 +32,35 @@ function checkPassword(password)
 		}
 
 	}
-	alert(strength);
+
+	if (strength == 0)
+	{
+		$("#meter").progressbar({value:20});
+		$(".ui-progressbar-value").css("background", "red");
+		$("#result").html("Too short").css("color", "red");
+	}
+	else if (strength < 3)
+	{
+		$("#meter").progressbar({value:40});
+		$(".ui-progressbar-value").css("background", "orange");
+		$("#result").html("Weak").css("color", "orange");
+	}
+	else if (strength == 3)
+	{
+		$("#meter").progressbar({value:70});
+		$(".ui-progressbar-value").css("background", "blue");
+		$("#result").html("Good").css("color", "blue");
+	}
+	else {
+		$("#meter").progressbar({value:100});
+		$(".ui-progressbar-value").css("background", "green");
+		$("#result").html("Strong").css("color", "green");
+	}
+	if (password.length == 0)
+	{
+		$("#meter").progressbar({value:0});
+		$(".ui-progressbar-value").css("background", "white");
+		$("#result").html("");
+	}
+
 }
